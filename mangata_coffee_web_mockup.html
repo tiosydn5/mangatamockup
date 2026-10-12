@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mangata Coffee & Eatery - Kukusan, Depok</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F9F6F0',
+                        coffee: {
+                            DEFAULT: '#4A3022',
+                            light: '#72503C',
+                        },
+                        /* Warna Hijau (Forest) diganti jadi Ocean (Biru Tosca) sesuai logo Mangata */
+                        ocean: {
+                            DEFAULT: '#22C5B7', /* Warna utama logo tosca */
+                            hover: '#1BA095',   /* Warna tosca pas di-hover (sedikit lebih gelap) */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(74, 48, 34, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream text-coffee font-sans antialiased pb-24 md:pb-0 selection:bg-ocean selection:text-cream relative">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-cream/90 backdrop-blur-md z-40 border-b border-coffee/10">
+        <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
+            <!-- Brand Logo Text -->
+            <a href="#" class="text-2xl font-black tracking-tight text-coffee flex items-center gap-2">
+                MANGATA
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex gap-8 font-bold text-coffee/80">
+                <a href="#beranda" class="hover:text-ocean transition-colors">Beranda</a>
+                <a href="#menu" class="hover:text-ocean transition-colors">Menu Favorit</a>
+                <a href="#lokasi" class="hover:text-ocean transition-colors">Lokasi</a>
+            </div>
+
+            <!-- Hamburger Menu (Mobile) -->
+            <button class="md:hidden text-coffee p-2 rounded-lg hover:bg-coffee/5 transition-colors" aria-label="Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="pt-24 pb-16 px-5 md:pt-28 md:pb-24 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
+        <!-- Hero Text content -->
+        <div class="flex-1 text-center md:text-left">
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-coffee/10 text-coffee font-bold text-sm">
+                👋 Warga Depok, mari merapat!
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black leading-[1.15] mb-3 text-coffee">
+                Tempat Nugas &<br>
+                Nongkrong <span class="text-ocean underline decoration-4 underline-offset-8">Senyaman Rumah.</span>
+            </h1>
+            <p class="text-lg text-coffee/80 mb-8 max-w-lg mx-auto md:mx-0 font-semibold leading-relaxed">
+                Kopi enak, suasana adem di Jl. Bungur Raya, Kukusan, Depok. Pas buat nugas ngebut atau sekadar ngobrol santai bareng temen.
+            </p>
+            
+            <!-- Desktop Buttons -->
+            <div class="hidden md:flex flex-wrap gap-4 justify-center md:justify-start">
+                <a href="#wa" class="bg-ocean hover:bg-ocean-hover text-white px-8 py-3.5 rounded-full font-bold transition-transform hover:scale-105 shadow-lg shadow-ocean/30 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.976L2 22l5.233-1.337a9.94 9.94 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-5.505-4.484-9.996-9.993-9.996zm0 18.256h-.003a8.212 8.212 0 01-3.95-1.01l-.284-.168-2.935.75.783-2.85-.185-.293a8.183 8.183 0 01-1.258-4.382c.001-4.526 3.684-8.204 8.214-8.204 4.525 0 8.207 3.681 8.207 8.205 0 4.525-3.682 8.204-8.208 8.204zm4.512-6.17c-.247-.124-1.463-.723-1.691-.806-.227-.082-.393-.124-.56.124-.166.247-.64 .806-.783.971-.145.166-.289.186-.537.062-.247-.124-1.045-.385-1.99-1.23-.736-.657-1.232-1.47-1.378-1.717-.145-.248-.015-.382.109-.505.111-.11.247-.289.37-.433.123-.145.165-.248.247-.413.083-.166.042-.31-.02-.434-.062-.124-.56-1.347-.768-1.844-.202-.483-.408-.418-.56-.426-.144-.008-.31-.009-.475-.009a.894.894 0 00-.642.298c-.221.239-.845.826-.845 2.015 0 1.189.866 2.338.986 2.497.12.16 1.706 2.607 4.133 3.655 2.428 1.049 2.428.699 2.923.658.495-.041 1.6-.654 1.826-1.285.227-.63.227-1.171.16-1.285-.067-.113-.232-.186-.48-.31z"/></svg>
+                    Reservasi Sekarang
+                </a>
+                <a href="#menu" class="border-2 border-coffee text-coffee hover:bg-coffee hover:text-cream px-8 py-3.5 rounded-full font-bold transition-all flex items-center justify-center">
+                    Lihat Menu Favorit
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Image Mockup -->
+        <div class="flex-1 w-full relative">
+            <div class="absolute inset-0 bg-ocean rounded-[2rem] transform translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4"></div>
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80" alt="Suasana Mangata Coffee" class="relative z-10 w-full h-[300px] md:h-[450px] object-cover rounded-[2rem] border-4 border-cream shadow-xl">
+            <!-- Floating aesthetic element -->
+            <div class="absolute -bottom-5 -left-5 z-20 bg-cream p-4 rounded-2xl shadow-soft border-2 border-coffee text-center rotate-3">
+                <span class="block text-2xl mb-1">✨</span>
+                <span class="font-black text-coffee text-sm">Free WiFi<br>& Colokan!</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 md:py-24 bg-white rounded-t-[3rem] shadow-[0_-10px_30px_-15px_rgba(74,48,34,0.1)]">
+        <div class="max-w-6xl mx-auto px-5">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-coffee mb-3">Menu Favorit Kami ☕</h2>
+                <p class="text-coffee/70 font-semibold max-w-md mx-auto">Pilihan andalan warga Mangata. Pasti ada yang cocok buat nemenin harimu.</p>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                
+                <!-- Menu Card 1 -->
+                <div onclick="openModal('Es Kopi Susu Mangata', 'Rp 22.000', 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=400&q=80', 'Kopi susu gula aren andalan dengan perpaduan kopi pilihan dan susu segar.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=400&q=80" alt="Es Kopi Susu" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
+                    <div class="px-1">
+                        <span class="inline-block bg-yellow-400 text-coffee text-[10px] md:text-xs font-black px-2 py-1 rounded-full mb-2 uppercase tracking-wide">Paling Laris</span>
+                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg">Es Kopi Susu Mangata</h3>
+                        <p class="text-ocean font-black">Rp 22.000</p>
+                    </div>
+                </div>
+
+                <!-- Menu Card 2 -->
+                <div onclick="openModal('Susu Aren Bungur', 'Rp 20.000', 'https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?auto=format&fit=crop&w=400&q=80', 'Pilihan non-kopi manis dari susu murni segar dipadukan dengan gula aren legit.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?auto=format&fit=crop&w=400&q=80" alt="Susu Aren" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
+                    <div class="px-1">
+                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg mt-7">Susu Aren Bungur</h3>
+                        <p class="text-ocean font-black">Rp 20.000</p>
+                    </div>
+                </div>
+
+                <!-- Menu Card 3 -->
+                <div onclick="openModal('Camilan Cireng Rujak', 'Rp 18.000', 'Cireng_di_kafe.jpg', 'Cireng krispi di luar, kenyal di dalam, disajikan dengan sambal bumbu rujak yang pedas manis.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <img src="Cireng_di_kafe.jpg" alt="Cireng" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
+                    <div class="px-1">
+                        <span class="inline-block bg-coffee/10 text-coffee text-[10px] md:text-xs font-black px-2 py-1 rounded-full mb-2 uppercase tracking-wide">Camilan</span>
+                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg">Camilan Cireng Rujak</h3>
+                        <p class="text-ocean font-black">Rp 18.000</p>
+                    </div>
+                </div>
+
+                <!-- Menu Card 4 -->
+                <div onclick="openModal('Nasi Goreng Spesial', 'Rp 28.000', 'nasi-goreng_11.jpeg', 'Nasi goreng bumbu rempah Mangata dengan telur mata sapi spesial buat yang lapar.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <img src="nasi-goreng_11.jpeg" alt="Nasi Goreng" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
+                    <div class="px-1">
+                        <span class="inline-block bg-coffee/10 text-coffee text-[10px] md:text-xs font-black px-2 py-1 rounded-full mb-2 uppercase tracking-wide">Makan Berat</span>
+                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg">Nasi Goreng Spesial</h3>
+                        <p class="text-ocean font-black">Rp 28.000</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-10 text-center">
+                <button class="md:hidden w-full border-2 border-coffee text-coffee py-3.5 rounded-full font-bold hover:bg-coffee hover:text-cream transition-colors">
+                    Lihat Semua Menu
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="lokasi" class="bg-coffee text-cream py-10 text-center px-5">
+        <h2 class="text-2xl font-black mb-2">MANGATA Coffee & Eatery</h2>
+        <p class="text-cream/70 font-semibold mb-6">Jl. Bungur Raya, Kukusan, Depok, Jawa Barat</p>
+        <p class="text-sm text-cream/50">© 2026 Mangata Coffee. Dibuat dengan ☕ oleh Satrio.</p>
+    </footer>
+
+    <!-- Fixed Mobile CTA -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full p-4 bg-cream/95 backdrop-blur-md border-t border-coffee/10 z-30">
+        <a href="#wa-link" class="w-full bg-ocean hover:bg-ocean-hover text-white py-4 rounded-full font-black text-center flex items-center justify-center gap-2 shadow-lg shadow-ocean/30 transition-transform hover:scale-105">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.976L2 22l5.233-1.337a9.94 9.94 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-5.505-4.484-9.996-9.993-9.996zm0 18.256h-.003a8.212 8.212 0 01-3.95-1.01l-.284-.168-2.935.75.783-2.85-.185-.293a8.183 8.183 0 01-1.258-4.382c.001-4.526 3.684-8.204 8.214-8.204 4.525 0 8.207 3.681 8.207 8.205 0 4.525-3.682 8.204-8.208 8.204zm4.512-6.17c-.247-.124-1.463-.723-1.691-.806-.227-.082-.393-.124-.56.124-.166.247-.64 .806-.783.971-.145.166-.289.186-.537.062-.247-.124-1.045-.385-1.99-1.23-.736-.657-1.232-1.47-1.378-1.717-.145-.248-.015-.382.109-.505.111-.11.247-.289.37-.433.123-.145.165-.248.247-.413.083-.166.042-.31-.02-.434-.062-.124-.56-1.347-.768-1.844-.202-.483-.408-.418-.56-.426-.144-.008-.31-.009-.475-.009a.894.894 0 00-.642.298c-.221.239-.845.826-.845 2.015 0 1.189.866 2.338.986 2.497.12.16 1.706 2.607 4.133 3.655 2.428 1.049 2.428.699 2.923.658.495-.041 1.6-.654 1.826-1.285.227-.63.227-1.171.16-1.285-.067-.113-.232-.186-.48-.31z"/></svg>
+            Reservasi Sekarang (WA)
+        </a>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL (POPUP) DETAIL PRODUK                    -->
+    <!-- ============================================== -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
+        <!-- Background Gelap (Klik buat nutup) -->
+        <div onclick="closeModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        
+        <!-- Kotak Popup -->
+        <div class="absolute bottom-0 md:bottom-auto md:top-1/2 left-0 md:left-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[450px] bg-white rounded-t-3xl md:rounded-3xl shadow-2xl transition-transform duration-300 translate-y-full md:translate-y-10" id="modalContent">
+            
+            <!-- Tombol Close -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-cream text-coffee p-2 rounded-full hover:bg-coffee/10 z-10 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Isi Popup -->
+            <div class="p-5">
+                <img id="modalImage" src="" alt="Produk" class="w-full h-56 md:h-64 object-cover rounded-2xl mb-4 border border-coffee/10">
+                <h3 id="modalTitle" class="text-2xl font-black text-coffee leading-tight mb-1">Nama Produk</h3>
+                <p id="modalPrice" class="text-xl text-ocean font-black mb-3">Rp 0</p>
+                <p id="modalDesc" class="text-coffee/80 text-sm font-semibold leading-relaxed mb-6">Deskripsi</p>
+                <hr class="border-coffee/10 mb-5">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center bg-cream rounded-xl border border-coffee/10">
+                        <button class="px-4 py-3 text-coffee font-black hover:bg-coffee/5 rounded-l-xl">-</button>
+                        <span class="px-3 font-bold text-coffee text-lg">1</span>
+                        <button class="px-4 py-3 text-coffee font-black hover:bg-coffee/5 rounded-r-xl">+</button>
+                    </div>
+                    <a href="#" class="flex-1 bg-ocean text-white font-black py-4 rounded-xl text-center hover:bg-ocean-hover transition-colors shadow-lg shadow-ocean/30">
+                        Pesan (WA)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT POPUP -->
+    <script>
+        const modal = document.getElementById('productModal');
+        const modalContent = document.getElementById('modalContent');
+        
+        function openModal(title, price, imageSrc, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalPrice').innerText = price;
+            document.getElementById('modalImage').src = imageSrc;
+            document.getElementById('modalDesc').innerText = desc;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('translate-y-full', 'md:translate-y-10');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('translate-y-full', 'md:translate-y-10');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
