@@ -3,240 +3,1254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mangata Coffee & Eatery - Kukusan, Depok</title>
+    <title>Mangata Coffee & Eatery — Kukusan, Depok</title>
     
+    <!-- Google Fonts: Full Poppins Standard UI Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        cream: '#F9F6F0',
-                        coffee: {
-                            DEFAULT: '#4A3022',
-                            light: '#72503C',
+                        canvas: 'var(--bg-canvas)',
+                        surface: 'var(--bg-surface)',
+                        elevated: 'var(--bg-elevated)',
+                        espresso: {
+                            DEFAULT: 'var(--text-primary)',
+                            muted: 'var(--text-secondary)',
+                            subtle: 'var(--text-muted)',
                         },
-                        /* Warna Hijau (Forest) diganti jadi Ocean (Biru Tosca) sesuai logo Mangata */
                         ocean: {
-                            DEFAULT: '#22C5B7', /* Warna utama logo tosca */
-                            hover: '#1BA095',   /* Warna tosca pas di-hover (sedikit lebih gelap) */
+                            DEFAULT: 'var(--accent-teal)',
+                            deep: 'var(--accent-teal-deep)',
+                            tint: 'var(--accent-teal-tint)',
                         }
                     },
                     fontFamily: {
-                        sans: ['Nunito', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(74, 48, 34, 0.08)',
+                        sans: ['Poppins', 'system-ui', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
+    <style>
+        /* ==========================================
+           SEMANTIC DESIGN TOKENS (:root)
+           ========================================== */
+        :root {
+            --bg-canvas: #F7F4EE;
+            --bg-surface: #EFECE4;
+            --bg-elevated: #FFFFFF;
+            
+            --text-primary: #261710;
+            --text-secondary: #5C473C;
+            --text-muted: #8C766A;
+            
+            --accent-teal: #22C5B7;
+            --accent-teal-deep: #137A70;
+            --accent-teal-tint: #E3F6F4;
+            
+            --border-hairline: rgba(38, 23, 16, 0.12);
+            --border-strong: rgba(38, 23, 16, 0.24);
+            
+            --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .hairline-border {
+            border-color: var(--border-hairline);
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible {
+            outline: 2px solid var(--accent-teal-deep);
+            outline-offset: 2px;
+        }
+
+        .transition-studio {
+            transition: transform 0.35s var(--ease-out-expo), opacity 0.35s var(--ease-out-expo), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
-<body class="bg-cream text-coffee font-sans antialiased pb-24 md:pb-0 selection:bg-ocean selection:text-cream relative">
+<body class="antialiased pb-24 md:pb-0 selection:bg-ocean selection:text-espresso">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full bg-cream/90 backdrop-blur-md z-40 border-b border-coffee/10">
-        <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
-            <!-- Brand Logo Text -->
-            <a href="#" class="text-2xl font-black tracking-tight text-coffee flex items-center gap-2">
-                MANGATA
-            </a>
+    <!-- ============================================== -->
+    <!-- HEADER & NAVIGATION                            -->
+    <!-- ============================================== -->
+    <header class="fixed top-0 inset-x-0 z-40 bg-canvas/90 backdrop-blur-md border-b hairline-border">
+        <div class="max-w-6xl mx-auto px-5 h-20 flex items-center justify-between gap-6">
             
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex gap-8 font-bold text-coffee/80">
-                <a href="#beranda" class="hover:text-ocean transition-colors">Beranda</a>
-                <a href="#menu" class="hover:text-ocean transition-colors">Menu Favorit</a>
-                <a href="#lokasi" class="hover:text-ocean transition-colors">Lokasi</a>
-            </div>
+<!-- Brand Identity (Ikon Gambar + Teks) -->
+<a href="#beranda" class="flex items-center gap-3.5 shrink-0 group" aria-label="Mangata Beranda">
+    <!-- Ganti logo-mangata.png sesuai nama file logo lu -->
+    <img src="logo.jpg" alt="Logo Mangata" class="w-10 h-10 rounded-xl object-cover">
+    
+    <div class="flex flex-col">
+        <span class="text-lg font-extrabold tracking-tight text-espresso leading-none whitespace-nowrap">MANGATA</span>
+        <span class="text-[11px] font-semibold tracking-wider text-ocean-deep uppercase mt-1 whitespace-nowrap">Coffee & Eatery</span>
+    </div>
+</a>
 
-            <!-- Hamburger Menu (Mobile) -->
-            <button class="md:hidden text-coffee p-2 rounded-lg hover:bg-coffee/5 transition-colors" aria-label="Menu">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-        </div>
-    </nav>
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-espresso-muted" aria-label="Navigasi Utama">
+                <a href="#beranda" class="hover:text-espresso transition-colors whitespace-nowrap py-2">Beranda</a>
+                <a href="#ruang" class="hover:text-espresso transition-colors whitespace-nowrap py-2">Ruang & Fasilitas</a>
+                <a href="#menu" class="hover:text-espresso transition-colors whitespace-nowrap py-2">Katalog Menu</a>
+                <a href="#reservasi" class="hover:text-espresso transition-colors whitespace-nowrap py-2">Reservasi</a>
+                <a href="#lokasi" class="hover:text-espresso transition-colors whitespace-nowrap py-2">Lokasi</a>
+            </nav>
 
-    <!-- Hero Section -->
-    <section id="beranda" class="pt-24 pb-16 px-5 md:pt-28 md:pb-24 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
-        <!-- Hero Text content -->
-        <div class="flex-1 text-center md:text-left">
-            <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-coffee/10 text-coffee font-bold text-sm">
-                👋 Warga Depok, mari merapat!
-            </div>
-            <h1 class="text-4xl md:text-6xl font-black leading-[1.15] mb-3 text-coffee">
-                Tempat Nugas &<br>
-                Nongkrong <span class="text-ocean underline decoration-4 underline-offset-8">Senyaman Rumah.</span>
-            </h1>
-            <p class="text-lg text-coffee/80 mb-8 max-w-lg mx-auto md:mx-0 font-semibold leading-relaxed">
-                Kopi enak, suasana adem di Jl. Bungur Raya, Kukusan, Depok. Pas buat nugas ngebut atau sekadar ngobrol santai bareng temen.
-            </p>
-            
-            <!-- Desktop Buttons -->
-            <div class="hidden md:flex flex-wrap gap-4 justify-center md:justify-start">
-                <a href="#wa" class="bg-ocean hover:bg-ocean-hover text-white px-8 py-3.5 rounded-full font-bold transition-transform hover:scale-105 shadow-lg shadow-ocean/30 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.976L2 22l5.233-1.337a9.94 9.94 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-5.505-4.484-9.996-9.993-9.996zm0 18.256h-.003a8.212 8.212 0 01-3.95-1.01l-.284-.168-2.935.75.783-2.85-.185-.293a8.183 8.183 0 01-1.258-4.382c.001-4.526 3.684-8.204 8.214-8.204 4.525 0 8.207 3.681 8.207 8.205 0 4.525-3.682 8.204-8.208 8.204zm4.512-6.17c-.247-.124-1.463-.723-1.691-.806-.227-.082-.393-.124-.56.124-.166.247-.64 .806-.783.971-.145.166-.289.186-.537.062-.247-.124-1.045-.385-1.99-1.23-.736-.657-1.232-1.47-1.378-1.717-.145-.248-.015-.382.109-.505.111-.11.247-.289.37-.433.123-.145.165-.248.247-.413.083-.166.042-.31-.02-.434-.062-.124-.56-1.347-.768-1.844-.202-.483-.408-.418-.56-.426-.144-.008-.31-.009-.475-.009a.894.894 0 00-.642.298c-.221.239-.845.826-.845 2.015 0 1.189.866 2.338.986 2.497.12.16 1.706 2.607 4.133 3.655 2.428 1.049 2.428.699 2.923.658.495-.041 1.6-.654 1.826-1.285.227-.63.227-1.171.16-1.285-.067-.113-.232-.186-.48-.31z"/></svg>
-                    Reservasi Sekarang
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2.5 shrink-0">
+                <button type="button" onclick="openCartModal()" class="min-h-[44px] bg-elevated hover:bg-surface text-espresso border hairline-border px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2.5 transition-studio whitespace-nowrap">
+                    <svg class="w-4 h-4 text-ocean-deep shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                        <path d="M3 6h18"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    <span class="hidden sm:inline">Pesanan</span>
+                    <span id="cartBadge" class="tabular-nums bg-ocean text-espresso text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                </button>
+
+                <a href="#reservasi" class="hidden sm:inline-flex min-h-[44px] bg-espresso hover:bg-espresso/90 text-canvas px-5 py-2 rounded-full text-sm font-semibold items-center gap-2 transition-studio whitespace-nowrap">
+                    Reservasi Meja
                 </a>
-                <a href="#menu" class="border-2 border-coffee text-coffee hover:bg-coffee hover:text-cream px-8 py-3.5 rounded-full font-bold transition-all flex items-center justify-center">
-                    Lihat Menu Favorit
-                </a>
-            </div>
-        </div>
 
-        <!-- Hero Image Mockup -->
-        <div class="flex-1 w-full relative">
-            <div class="absolute inset-0 bg-ocean rounded-[2rem] transform translate-x-3 translate-y-3 md:translate-x-4 md:translate-y-4"></div>
-            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80" alt="Suasana Mangata Coffee" class="relative z-10 w-full h-[300px] md:h-[450px] object-cover rounded-[2rem] border-4 border-cream shadow-xl">
-            <!-- Floating aesthetic element -->
-            <div class="absolute -bottom-5 -left-5 z-20 bg-cream p-4 rounded-2xl shadow-soft border-2 border-coffee text-center rotate-3">
-                <span class="block text-2xl mb-1">✨</span>
-                <span class="font-black text-coffee text-sm">Free WiFi<br>& Colokan!</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Menu Section -->
-    <section id="menu" class="py-16 md:py-24 bg-white rounded-t-[3rem] shadow-[0_-10px_30px_-15px_rgba(74,48,34,0.1)]">
-        <div class="max-w-6xl mx-auto px-5">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-black text-coffee mb-3">Menu Favorit Kami ☕</h2>
-                <p class="text-coffee/70 font-semibold max-w-md mx-auto">Pilihan andalan warga Mangata. Pasti ada yang cocok buat nemenin harimu.</p>
-            </div>
-
-            <!-- Grid Layout -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                
-                <!-- Menu Card 1 -->
-                <div onclick="openModal('Es Kopi Susu Mangata', 'Rp 22.000', 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=400&q=80', 'Kopi susu gula aren andalan dengan perpaduan kopi pilihan dan susu segar.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=400&q=80" alt="Es Kopi Susu" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
-                    <div class="px-1">
-                        <span class="inline-block bg-yellow-400 text-coffee text-[10px] md:text-xs font-black px-2 py-1 rounded-full mb-2 uppercase tracking-wide">Paling Laris</span>
-                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg">Es Kopi Susu Mangata</h3>
-                        <p class="text-ocean font-black">Rp 22.000</p>
-                    </div>
-                </div>
-
-                <!-- Menu Card 2 -->
-                <div onclick="openModal('Susu Aren Bungur', 'Rp 20.000', 'https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?auto=format&fit=crop&w=400&q=80', 'Pilihan non-kopi manis dari susu murni segar dipadukan dengan gula aren legit.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?auto=format&fit=crop&w=400&q=80" alt="Susu Aren" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
-                    <div class="px-1">
-                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg mt-7">Susu Aren Bungur</h3>
-                        <p class="text-ocean font-black">Rp 20.000</p>
-                    </div>
-                </div>
-
-                <!-- Menu Card 3 -->
-                <div onclick="openModal('Camilan Cireng Rujak', 'Rp 18.000', 'Cireng_di_kafe.jpg', 'Cireng krispi di luar, kenyal di dalam, disajikan dengan sambal bumbu rujak yang pedas manis.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                    <img src="Cireng_di_kafe.jpg" alt="Cireng" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
-                    <div class="px-1">
-                        <span class="inline-block bg-coffee/10 text-coffee text-[10px] md:text-xs font-black px-2 py-1 rounded-full mb-2 uppercase tracking-wide">Camilan</span>
-                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg">Camilan Cireng Rujak</h3>
-                        <p class="text-ocean font-black">Rp 18.000</p>
-                    </div>
-                </div>
-
-                <!-- Menu Card 4 -->
-                <div onclick="openModal('Nasi Goreng Spesial', 'Rp 28.000', 'nasi-goreng_11.jpeg', 'Nasi goreng bumbu rempah Mangata dengan telur mata sapi spesial buat yang lapar.')" class="bg-cream rounded-2xl p-3 border border-coffee/10 hover:shadow-soft hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                    <img src="nasi-goreng_11.jpeg" alt="Nasi Goreng" class="w-full h-36 md:h-48 object-cover rounded-xl mb-3">
-                    <div class="px-1">
-                        <span class="inline-block bg-coffee/10 text-coffee text-[10px] md:text-xs font-black px-2 py-1 rounded-full mb-2 uppercase tracking-wide">Makan Berat</span>
-                        <h3 class="font-bold text-coffee leading-tight mb-1 md:text-lg">Nasi Goreng Spesial</h3>
-                        <p class="text-ocean font-black">Rp 28.000</p>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="mt-10 text-center">
-                <button class="md:hidden w-full border-2 border-coffee text-coffee py-3.5 rounded-full font-bold hover:bg-coffee hover:text-cream transition-colors">
-                    Lihat Semua Menu
+                <button type="button" onclick="toggleMobileMenu()" class="lg:hidden w-11 h-11 rounded-full border hairline-border bg-elevated flex items-center justify-center text-espresso hover:bg-surface transition-studio" aria-label="Buka Menu Navigasi">
+                    <svg id="mobileMenuIcon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="7" x2="20" y2="7"/>
+                        <line x1="4" y1="12" x2="20" y2="12"/>
+                        <line x1="4" y1="17" x2="20" y2="17"/>
+                    </svg>
                 </button>
             </div>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer id="lokasi" class="bg-coffee text-cream py-10 text-center px-5">
-        <h2 class="text-2xl font-black mb-2">MANGATA Coffee & Eatery</h2>
-        <p class="text-cream/70 font-semibold mb-6">Jl. Bungur Raya, Kukusan, Depok, Jawa Barat</p>
-        <p class="text-sm text-cream/50">© 2026 Mangata Coffee. Dibuat dengan ☕ oleh Satrio.</p>
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-canvas border-b hairline-border px-5 pt-2 pb-6 space-y-1">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-xl font-semibold text-espresso hover:bg-surface">Beranda</a>
+            <a href="#ruang" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-xl font-semibold text-espresso hover:bg-surface">Ruang & Fasilitas</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-xl font-semibold text-espresso hover:bg-surface">Katalog Menu</a>
+            <a href="#reservasi" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-xl font-semibold text-espresso hover:bg-surface">Reservasi Meja</a>
+            <a href="#lokasi" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded-xl font-semibold text-espresso hover:bg-surface">Lokasi & Jam Operasional</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============================================== -->
+        <!-- HERO SECTION (CLEAN POPPINS & COMPACT SPEC BAR)-->
+        <!-- ============================================== -->
+        <section id="beranda" class="pt-28 pb-10 md:pt-36 md:pb-14 px-5 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                
+                <!-- Left Column: Copy & Spec Metrics (7 Cols) -->
+                <div class="lg:col-span-7 text-left">
+                    
+                    <!-- Location Tag Pill -->
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-6 rounded-full bg-surface border hairline-border text-espresso-muted text-xs font-medium">
+                        <span class="w-2 h-2 rounded-full bg-ocean-deep shrink-0"></span>
+                        <span class="whitespace-nowrap">Jl. Bungur Raya, Kukusan, Depok</span>
+                        <span class="text-espresso/30">|</span>
+                        <span class="tabular-nums text-espresso font-semibold whitespace-nowrap">08.00–23.00 WIB</span>
+                    </div>
+
+                    <!-- Punchy 2-Line Heading in Poppins -->
+                    <h1 class="text-3xl sm:text-5xl md:text-[3.25rem] font-extrabold text-espresso leading-[1.15] tracking-tight mb-5">
+                        Tempat Nugas & Nongkrong <span class="text-ocean-deep">Senyaman Rumah.</span>
+                    </h1>
+
+                    <p class="text-sm sm:text-base md:text-lg text-espresso-muted leading-relaxed mb-8 max-w-[56ch]">
+                        Kedai kopi dan kuliner lokal di Kukusan, Depok. Menyajikan racikan kopi harian, minuman segar non-kopi, hingga makanan berat dengan suasana tenang dan nyaman.
+                    </p>
+
+                    <!-- Primary Action Group -->
+                    <div class="flex flex-wrap items-center gap-3.5 mb-10">
+                        <a href="#menu" class="min-h-[48px] bg-espresso hover:bg-espresso/90 text-canvas px-7 py-3.5 rounded-full font-semibold text-sm inline-flex items-center gap-2.5 transition-studio whitespace-nowrap">
+                            <span>Lihat Katalog Menu</span>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <polyline points="19 12 12 19 5 12"/>
+                            </svg>
+                        </a>
+                        <a href="#reservasi" class="min-h-[48px] bg-ocean hover:bg-ocean/90 text-espresso px-7 py-3.5 rounded-full font-bold text-sm inline-flex items-center gap-2 transition-studio whitespace-nowrap">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                            <span>Reservasi Meja</span>
+                        </a>
+                    </div>
+
+                    <!-- Compact Spec Bar (DIPERBAIKI: w-fit + flex agar jarak antar kolom & garis presisi) -->
+                    <div class="inline-flex flex-wrap sm:flex-nowrap items-center border-t hairline-border pt-6 gap-y-4">
+                        <div class="pr-6 sm:pr-8">
+                            <span class="block text-[11px] font-semibold uppercase tracking-wider text-espresso-subtle mb-1 whitespace-nowrap">Pilihan Ruang</span>
+                            <span class="block text-sm sm:text-base font-bold text-espresso whitespace-nowrap">Indoor AC & Outdoor</span>
+                        </div>
+                        <div class="border-x hairline-border px-6 sm:px-8">
+                            <span class="block text-[11px] font-semibold uppercase tracking-wider text-espresso-subtle mb-1 whitespace-nowrap">Fasilitas Meja</span>
+                            <span class="block text-sm sm:text-base font-bold text-ocean-deep whitespace-nowrap">WiFi & Akses Colokan</span>
+                        </div>
+                        <div class="pl-6 sm:pl-8">
+                            <span class="block text-[11px] font-semibold uppercase tracking-wider text-espresso-subtle mb-1 whitespace-nowrap">Rentang Harga</span>
+                            <span class="block tabular-nums text-sm sm:text-base font-bold text-espresso whitespace-nowrap">Rp 18rb — 28rb</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Space Showcase (5 Cols) -->
+                <div class="lg:col-span-5 w-full">
+                    <div class="bg-elevated p-3.5 rounded-3xl border hairline-border shadow-sm">
+                        
+                        <!-- Media Frame -->
+                        <div class="relative rounded-2xl overflow-hidden bg-espresso aspect-[4/3] mb-3.5">
+                            <img id="heroImage" src="indoor.jpg" alt="Area Indoor AC Mangata Coffee" class="w-full h-full object-cover transition-studio">
+                            
+                            <div class="absolute top-3 left-3 right-3 flex justify-between items-center pointer-events-none">
+                                <span id="heroBadge" class="bg-canvas/95 backdrop-blur-md text-espresso text-[11px] font-bold px-3 py-1.5 rounded-full border hairline-border tracking-wide">
+                                    01 / RUANG INDOOR AC
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Caption & Space Switcher (DIPERBAIKI: shrink-0 whitespace-nowrap pada 1 / 3) -->
+                        <div class="px-1 pt-0.5 pb-0.5">
+                            <div class="flex items-start justify-between gap-4 mb-3.5 px-1">
+                                <div class="min-w-0">
+                                    <p id="heroTitle" class="font-bold text-sm text-espresso">Area Indoor Ber-AC</p>
+                                    <p id="heroDesc" class="text-xs text-espresso-muted mt-0.5">Tenang, sejuk, dengan stopkontak di dekat meja.</p>
+                                </div>
+                                <span id="heroIndex" class="shrink-0 whitespace-nowrap tabular-nums text-xs font-semibold text-espresso-subtle bg-surface px-2.5 py-1 rounded-full border hairline-border">
+                                    1 / 3
+                                </span>
+                            </div>
+
+                            <!-- 3 Interactive Space Tabs -->
+                            <div class="grid grid-cols-3 gap-1.5 bg-surface p-1 rounded-xl border hairline-border" role="tablist" aria-label="Pilih Sudut Ruang">
+                                <button type="button" onclick="switchHeroPhoto(0)" class="hero-tab min-h-[38px] py-1.5 px-2 rounded-lg font-semibold text-xs bg-espresso text-canvas transition-studio whitespace-nowrap">
+                                    Indoor AC
+                                </button>
+                                <button type="button" onclick="switchHeroPhoto(1)" class="hero-tab min-h-[38px] py-1.5 px-2 rounded-lg font-semibold text-xs text-espresso-muted hover:text-espresso transition-studio whitespace-nowrap">
+                                    Teras Outdoor
+                                </button>
+                                <button type="button" onclick="switchHeroPhoto(2)" class="hero-tab min-h-[38px] py-1.5 px-2 rounded-lg font-semibold text-xs text-espresso-muted hover:text-espresso transition-studio whitespace-nowrap">
+                                    Bar Espresso
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- RUANG & FASILITAS                              -->
+        <!-- ============================================== -->
+        <section id="ruang" class="py-10 md:py-14 px-5 max-w-6xl mx-auto">
+            <div class="border-y hairline-border py-10 md:py-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-espresso tracking-tight">Dirancang untuk Fokus & Santai</h2>
+                    </div>
+                    <p class="text-sm text-espresso-muted max-w-md">
+                        Fasilitas esensial yang kami siapkan agar kamu nyaman berlama-lama, baik saat mengejar tugas maupun berkumpul sore.
+                    </p>
+                </div>
+
+                <!-- 4-Column Hairline Grid (Tanpa Tanda Bintang Markdown) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-ocean-tint text-ocean-deep flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                                    <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                                    <line x1="12" y1="20" x2="12.01" y2="20"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-base text-espresso mb-1.5">WiFi Stabil & Colokan</h3>
+                            <p class="text-sm text-espresso-muted leading-relaxed">Koneksi internet memadai dengan jangkauan stopkontak yang ramah bagi pengguna laptop.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="flex flex-col justify-between sm:border-l sm:pl-6 hairline-border">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-ocean-tint text-ocean-deep flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                    <polyline points="9 22 9 12 15 12 15 22"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-base text-espresso mb-1.5">Dua Karakter Ruang</h3>
+                            <p class="text-sm text-espresso-muted leading-relaxed">Pilih ruang indoor ber-AC yang kondusif untuk bekerja atau area outdoor yang sirkulasinya lega.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="flex flex-col justify-between lg:border-l lg:pl-6 hairline-border">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-ocean-tint text-ocean-deep flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+                                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-base text-espresso mb-1.5">Kopi & Makanan Mengenyangkan</h3>
+                            <p class="text-sm text-espresso-muted leading-relaxed">Mulai dari Es Kopi Susu Gula Aren, Cireng Rujak hangat, hingga Nasi Goreng Spesial.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="flex flex-col justify-between sm:border-l sm:pl-6 hairline-border">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-ocean-tint text-ocean-deep flex items-center justify-center mb-4">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-base text-espresso mb-1.5">Akses Mudah di Kukusan</h3>
+                            <p class="text-sm text-espresso-muted leading-relaxed">Terletak di Jl. Bungur Raya, dekat dengan lingkungan kampus dan tempat tinggal mahasiswa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- MENU CATALOG SECTION                           -->
+        <!-- ============================================== -->
+        <section id="menu" class="py-12 md:py-16 px-5 max-w-6xl mx-auto">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-espresso tracking-tight mb-2">Katalog Menu Mangata</h2>
+                    <p class="text-sm md:text-base text-espresso-muted">Klik kartu menu untuk mengatur takaran gula/pedas, atau tekan tombol <span class="font-bold text-espresso">+</span> untuk tambah cepat.</p>
+                </div>
+                <div class="text-xs font-semibold text-espresso-subtle tabular-nums uppercase tracking-wider">
+                    Menampilkan <span id="visibleCountLabel" class="font-bold text-espresso">10</span> dari 10 Menu
+                </div>
+            </div>
+
+            <!-- Interactive Search & Filter Bar -->
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-8 pb-6 border-b hairline-border">
+                
+                <!-- Search Box -->
+                <div class="relative flex-1 max-w-md w-full">
+                    <svg class="w-4 h-4 text-espresso-subtle absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input id="searchInput" oninput="applyMenuFilter()" type="text" placeholder="Cari kopi susu, matcha, cireng, nasi goreng..." class="w-full min-h-[44px] bg-elevated border hairline-border rounded-full pl-11 pr-10 py-2.5 text-sm font-medium text-espresso placeholder:text-espresso-subtle focus:border-espresso">
+                    <button id="clearSearchBtn" type="button" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full hover:bg-surface text-espresso-muted flex items-center justify-center" aria-label="Hapus pencarian">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Category Filter Pills -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 lg:pb-0" role="tablist" aria-label="Filter Kategori Menu">
+                    <button type="button" onclick="setCategory('all')" data-cat="all" class="cat-btn min-h-[40px] bg-espresso text-canvas px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap">Semua Menu</button>
+                    <button type="button" onclick="setCategory('Andalan')" data-cat="Andalan" class="cat-btn min-h-[40px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap">Andalan Warga</button>
+                    <button type="button" onclick="setCategory('Kopi')" data-cat="Kopi" class="cat-btn min-h-[40px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap">Kopi</button>
+                    <button type="button" onclick="setCategory('Non-Kopi')" data-cat="Non-Kopi" class="cat-btn min-h-[40px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap">Non-Kopi</button>
+                    <button type="button" onclick="setCategory('Camilan')" data-cat="Camilan" class="cat-btn min-h-[40px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap">Camilan</button>
+                    <button type="button" onclick="setCategory('Makan Berat')" data-cat="Makan Berat" class="cat-btn min-h-[40px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap">Makan Berat</button>
+                </div>
+            </div>
+
+            <!-- 10 STATIC MENU CARDS IN DOM -->
+            <div id="menuGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
+                
+                <!-- Card 1 -->
+                <article onclick="openProductModal(1)" data-category="Kopi" data-popular="true" data-name="es kopi susu mangata gula aren" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="kopi susu.jpg" alt="Es Kopi Susu Mangata" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                            <span class="absolute top-2 left-2 bg-ocean text-espresso text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Terlaris</span>
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Kopi</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Es Kopi Susu Mangata</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Racikan espresso dengan susu segar dan manis legit gula aren asli.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 22.000</span>
+                        <button type="button" onclick="quickAdd(event, 1)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Es Kopi Susu Mangata ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article onclick="openProductModal(2)" data-category="Non-Kopi" data-popular="true" data-name="susu aren bungur non kopi" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="aren.jpg" alt="Susu Aren Bungur" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                            <span class="absolute top-2 left-2 bg-ocean text-espresso text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Andalan</span>
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Non-Kopi</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Susu Aren Bungur</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Susu murni dingin berpadu dengan saus gula aren racikan khas.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 20.000</span>
+                        <button type="button" onclick="quickAdd(event, 2)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Susu Aren Bungur ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article onclick="openProductModal(3)" data-category="Camilan" data-popular="true" data-name="camilan cireng rujak gorengan" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=500&q=80" alt="Camilan Cireng Rujak" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                            <span class="absolute top-2 left-2 bg-ocean text-espresso text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Favorit</span>
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Camilan</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Camilan Cireng Rujak</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Cireng renyah di luar dan kenyal di dalam dengan cocolan sambal rujak.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 18.000</span>
+                        <button type="button" onclick="quickAdd(event, 3)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Camilan Cireng Rujak ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article onclick="openProductModal(4)" data-category="Makan Berat" data-popular="true" data-name="nasi goreng spesial mangata telur" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="nasgor.jpg" alt="Nasi Goreng Spesial" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                            <span class="absolute top-2 left-2 bg-ocean text-espresso text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Andalan</span>
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Makan Berat</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Nasi Goreng Spesial</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Nasi goreng bumbu rempah rumahan disajikan dengan telur mata sapi.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 28.000</span>
+                        <button type="button" onclick="quickAdd(event, 4)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Nasi Goreng Spesial ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article onclick="openProductModal(5)" data-category="Kopi" data-popular="false" data-name="iced americano kopi hitam dingin" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="Iced Americano.jpg" alt="Iced Americano" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Kopi</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Iced Americano</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Double shot espresso segar dengan air dingin untuk fokus ekstra.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 18.000</span>
+                        <button type="button" onclick="quickAdd(event, 5)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Iced Americano ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article onclick="openProductModal(6)" data-category="Kopi" data-popular="false" data-name="caramel macchiato kopi susu karamel" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="caramel.jpg" alt="Caramel Macchiato" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Kopi</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Caramel Macchiato</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Perpaduan espresso, susu lembut, vanila, dan saus karamel.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 25.000</span>
+                        <button type="button" onclick="quickAdd(event, 6)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Caramel Macchiato ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 7 -->
+                <article onclick="openProductModal(7)" data-category="Non-Kopi" data-popular="true" data-name="iced matcha latte green tea" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="matcha.jpg" alt="Iced Matcha Latte" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                            <span class="absolute top-2 left-2 bg-ocean text-espresso text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Andalan</span>
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Non-Kopi</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Iced Matcha Latte</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Seduhan bubuk matcha Jepang yang pekat dan creamy dengan susu.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 24.000</span>
+                        <button type="button" onclick="quickAdd(event, 7)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Iced Matcha Latte ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 8 -->
+                <article onclick="openProductModal(8)" data-category="Non-Kopi" data-popular="false" data-name="signature chocolate es coklat" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="coklat.jpg" alt="Signature Chocolate" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Non-Kopi</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Signature Chocolate</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Cokelat pekat bertekstur lembut disajikan dingin maupun hangat.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 23.000</span>
+                        <button type="button" onclick="quickAdd(event, 8)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Signature Chocolate ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 9 -->
+                <article onclick="openProductModal(9)" data-category="Camilan" data-popular="false" data-name="french fries kentang goreng crispy" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="kentang.jpg" alt="Kentang Goreng Crispy" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Camilan</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Kentang Goreng Crispy</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Kentang goreng renyah berbumbu gurih dengan saus sambal dan keju.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 18.000</span>
+                        <button type="button" onclick="quickAdd(event, 9)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Kentang Goreng Crispy ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Card 10 -->
+                <article onclick="openProductModal(10)" data-category="Makan Berat" data-popular="false" data-name="rice bowl ayam sambal matah makan berat" class="menu-card group bg-elevated rounded-2xl p-3 border hairline-border hover:border-espresso/40 transition-studio cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="relative aspect-square rounded-xl overflow-hidden bg-surface mb-3">
+                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80" alt="Rice Bowl Ayam Matah" class="w-full h-full object-cover group-hover:scale-105 transition-studio">
+                        </div>
+                        <span class="block text-[11px] font-medium text-espresso-subtle px-1 mb-0.5">Makan Berat</span>
+                        <h3 class="font-bold text-espresso text-sm md:text-base leading-snug mb-1 px-1">Rice Bowl Ayam Matah</h3>
+                        <p class="text-xs text-espresso-muted px-1 line-clamp-2 mb-3">Nasi hangat dengan ayam goreng tepung renyah dan sambal matah segar.</p>
+                    </div>
+                    <div class="flex items-center justify-between px-1 pt-2.5 border-t hairline-border">
+                        <span class="tabular-nums font-bold text-espresso text-sm">Rp 26.000</span>
+                        <button type="button" onclick="quickAdd(event, 10)" class="w-9 h-9 rounded-xl bg-surface hover:bg-espresso text-espresso hover:text-canvas transition-studio flex items-center justify-center" aria-label="Tambah Rice Bowl Ayam Matah ke pesanan">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="emptyMenuState" class="hidden text-center py-14 bg-surface rounded-2xl border hairline-border mt-4">
+                <p class="text-espresso-muted font-medium mb-4">Menu yang kamu cari tidak ditemukan di katalog.</p>
+                <button type="button" onclick="resetFilter()" class="min-h-[40px] bg-espresso text-canvas px-5 py-2 rounded-full font-semibold text-xs">Reset Pencarian</button>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- RESERVATION SECTION                            -->
+        <!-- ============================================== -->
+        <section id="reservasi" class="py-12 md:py-16 px-5 max-w-6xl mx-auto">
+            <div class="bg-espresso text-canvas rounded-3xl p-6 sm:p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Left Narrative (6 Cols) -->
+                <div class="lg:col-span-6 space-y-5">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-canvas/10 text-ocean font-semibold text-xs uppercase tracking-wider">
+                        <span>Reservasi Meja Tanpa Biaya</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight">
+                        Rencana nugas kelompok atau kumpul bareng teman?
+                    </h2>
+                    <p class="text-canvas/75 text-sm md:text-base leading-relaxed">
+                        Pesan tempat lebih awal agar meja pilihanmu siap saat kamu tiba. Isi detail kedatangan di samping, lalu kirimkan format reservasinya langsung ke WhatsApp kami.
+                    </p>
+
+                    <div class="pt-4 border-t border-canvas/15 grid grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <span class="block text-canvas/50 uppercase font-semibold tracking-wider mb-1">Konfirmasi Cepat</span>
+                            <span class="font-semibold text-canvas">Langsung terhubung ke Admin WA</span>
+                        </div>
+                        <div>
+                            <span class="block text-canvas/50 uppercase font-semibold tracking-wider mb-1">Kapasitas Fleksibel</span>
+                            <span class="font-semibold text-canvas">Meja individu hingga rombongan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Interactive Form (6 Cols) -->
+                <div class="lg:col-span-6 bg-canvas text-espresso rounded-2xl p-5 sm:p-7">
+                    <div class="flex items-center justify-between pb-4 mb-5 border-b hairline-border">
+                        <h3 class="font-bold text-lg text-espresso">Detail Reservasi</h3>
+                        <span class="text-xs text-ocean-deep font-semibold">Konfirmasi via WA</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="resName" class="block text-xs font-semibold uppercase tracking-wider text-espresso-muted mb-1.5">Nama Pemesan</label>
+                            <input id="resName" type="text" placeholder="Contoh: Satrio / Tim Diskusi" class="w-full min-h-[44px] bg-elevated border hairline-border rounded-xl px-4 py-2.5 text-sm font-medium text-espresso placeholder:text-espresso-subtle focus:border-espresso">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="resTime" class="block text-xs font-semibold uppercase tracking-wider text-espresso-muted mb-1.5">Waktu Kedatangan</label>
+                                <input id="resTime" type="text" value="Hari ini, 16.00 WIB" class="w-full min-h-[44px] tabular-nums bg-elevated border hairline-border rounded-xl px-3.5 py-2 text-sm font-medium text-espresso focus:border-espresso">
+                                <div class="flex gap-1.5 mt-2">
+                                    <button type="button" onclick="setQuickTime('Siang, 13.00 WIB')" class="tabular-nums text-[11px] font-semibold bg-surface hover:bg-espresso hover:text-canvas px-2.5 py-1 rounded-md transition-studio">13.00</button>
+                                    <button type="button" onclick="setQuickTime('Sore, 16.00 WIB')" class="tabular-nums text-[11px] font-semibold bg-surface hover:bg-espresso hover:text-canvas px-2.5 py-1 rounded-md transition-studio">16.00</button>
+                                    <button type="button" onclick="setQuickTime('Malam, 19.30 WIB')" class="tabular-nums text-[11px] font-semibold bg-surface hover:bg-espresso hover:text-canvas px-2.5 py-1 rounded-md transition-studio">19.30</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-espresso-muted mb-1.5">Jumlah Tamu</label>
+                                <div class="flex items-center justify-between min-h-[44px] bg-elevated border hairline-border rounded-xl px-2 py-1">
+                                    <button type="button" onclick="changeResPax(-1)" class="w-9 h-9 rounded-lg bg-surface hover:bg-espresso hover:text-canvas font-bold text-base transition-studio" aria-label="Kurangi jumlah tamu">-</button>
+                                    <span id="resPaxDisplay" class="tabular-nums font-bold text-sm text-espresso">2 Orang</span>
+                                    <button type="button" onclick="changeResPax(1)" class="w-9 h-9 rounded-lg bg-surface hover:bg-espresso hover:text-canvas font-bold text-base transition-studio" aria-label="Tambah jumlah tamu">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-espresso-muted mb-1.5">Preferensi Area Duduk</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="selectResArea('Indoor AC', this)" class="res-area-btn min-h-[42px] bg-espresso text-canvas py-2 px-2 rounded-xl font-semibold text-xs transition-studio">Indoor AC</button>
+                                <button type="button" onclick="selectResArea('Teras Outdoor', this)" class="res-area-btn min-h-[42px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso py-2 px-2 rounded-xl font-semibold text-xs transition-studio">Teras Outdoor</button>
+                                <button type="button" onclick="selectResArea('Fleksibel', this)" class="res-area-btn min-h-[42px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso py-2 px-2 rounded-xl font-semibold text-xs transition-studio">Fleksibel</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="resNote" class="block text-xs font-semibold uppercase tracking-wider text-espresso-muted mb-1.5">Catatan Keperluan (Opsional)</label>
+                            <input id="resNote" type="text" placeholder="Contoh: Meja dekat colokan untuk laptop" class="w-full min-h-[44px] bg-elevated border hairline-border rounded-xl px-4 py-2.5 text-sm font-medium text-espresso placeholder:text-espresso-subtle focus:border-espresso">
+                            <div class="flex flex-wrap gap-1.5 mt-2">
+                                <button type="button" onclick="setQuickResNote('Meja dekat colokan untuk nugas')" class="text-[11px] font-medium bg-surface hover:bg-espresso hover:text-canvas px-2.5 py-1 rounded-md transition-studio">+ Dekat Colokan</button>
+                                <button type="button" onclick="setQuickResNote('Meja besar untuk diskusi kelompok')" class="text-[11px] font-medium bg-surface hover:bg-espresso hover:text-canvas px-2.5 py-1 rounded-md transition-studio">+ Meja Diskusi</button>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="submitReservationWA()" class="w-full min-h-[48px] bg-ocean hover:bg-ocean/90 text-espresso font-bold py-3.5 rounded-xl transition-studio flex items-center justify-center gap-2 text-sm mt-2">
+                            <span>Kirim Reservasi ke WhatsApp</span>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- LOCATION & HOURS SECTION                       -->
+        <!-- ============================================== -->
+        <section id="lokasi" class="py-12 md:py-16 px-5 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-t hairline-border pt-12">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-espresso tracking-tight mb-2">Lokasi & Jam Buka</h2>
+                        <p class="text-sm text-espresso-muted">Singgah langsung untuk menikmati kopi hangat atau ambil pesanan takeaway kamu.</p>
+                    </div>
+
+                    <div class="space-y-4 border-y hairline-border py-5">
+                        <div>
+                            <span class="block text-xs font-semibold uppercase tracking-wider text-espresso-subtle mb-1">Alamat Kedai</span>
+                            <p id="cafeAddress" class="text-sm font-semibold text-espresso leading-relaxed">
+                                Jl. Bungur Raya, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat
+                            </p>
+                        </div>
+                        <div>
+                            <span class="block text-xs font-semibold uppercase tracking-wider text-espresso-subtle mb-1">Jam Operasional</span>
+                            <p class="tabular-nums text-sm font-bold text-ocean-deep">Senin – Minggu: 08.00 – 23.00 WIB</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Bungur+Raya+Kukusan+Depok" target="_blank" rel="noopener noreferrer" class="flex-1 min-h-[44px] bg-espresso hover:bg-espresso/90 text-canvas py-2.5 px-5 rounded-full font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-studio whitespace-nowrap">
+                            <span>Buka di Google Maps</span>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                        <button type="button" onclick="copyAddress()" class="min-h-[44px] bg-elevated hover:bg-surface text-espresso border hairline-border py-2.5 px-5 rounded-full font-semibold text-xs sm:text-sm transition-studio whitespace-nowrap">
+                            Salin Alamat
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 h-72 md:h-80 w-full rounded-2xl overflow-hidden border hairline-border bg-surface">
+                    <iframe 
+                        title="Peta Lokasi Mangata Coffee Kukusan Depok"
+                        src="https://www.google.com/maps?q=Jl.+Bungur+Raya,+Kukusan,+Beji,+Depok&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================== -->
+    <!-- FOOTER                                         -->
+    <!-- ============================================== -->
+    <footer class="border-t hairline-border bg-surface py-10 px-5">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <span class="font-bold text-lg text-espresso">Mangata Coffee & Eatery</span>
+                <p class="text-xs text-espresso-muted mt-0.5">Jl. Bungur Raya, Kukusan, Depok, Jawa Barat</p>
+            </div>
+            <p class="text-xs text-espresso-subtle">© 2026 Mangata Coffee. Dirancang oleh Satrio.</p>
+        </div>
     </footer>
 
-    <!-- Fixed Mobile CTA -->
-    <div class="md:hidden fixed bottom-0 left-0 w-full p-4 bg-cream/95 backdrop-blur-md border-t border-coffee/10 z-30">
-        <a href="#wa-link" class="w-full bg-ocean hover:bg-ocean-hover text-white py-4 rounded-full font-black text-center flex items-center justify-center gap-2 shadow-lg shadow-ocean/30 transition-transform hover:scale-105">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.964 9.964 0 001.333 4.976L2 22l5.233-1.337a9.94 9.94 0 004.779 1.217h.004c5.505 0 9.988-4.478 9.989-9.984 0-5.505-4.484-9.996-9.993-9.996zm0 18.256h-.003a8.212 8.212 0 01-3.95-1.01l-.284-.168-2.935.75.783-2.85-.185-.293a8.183 8.183 0 01-1.258-4.382c.001-4.526 3.684-8.204 8.214-8.204 4.525 0 8.207 3.681 8.207 8.205 0 4.525-3.682 8.204-8.208 8.204zm4.512-6.17c-.247-.124-1.463-.723-1.691-.806-.227-.082-.393-.124-.56.124-.166.247-.64 .806-.783.971-.145.166-.289.186-.537.062-.247-.124-1.045-.385-1.99-1.23-.736-.657-1.232-1.47-1.378-1.717-.145-.248-.015-.382.109-.505.111-.11.247-.289.37-.433.123-.145.165-.248.247-.413.083-.166.042-.31-.02-.434-.062-.124-.56-1.347-.768-1.844-.202-.483-.408-.418-.56-.426-.144-.008-.31-.009-.475-.009a.894.894 0 00-.642.298c-.221.239-.845.826-.845 2.015 0 1.189.866 2.338.986 2.497.12.16 1.706 2.607 4.133 3.655 2.428 1.049 2.428.699 2.923.658.495-.041 1.6-.654 1.826-1.285.227-.63.227-1.171.16-1.285-.067-.113-.232-.186-.48-.31z"/></svg>
-            Reservasi Sekarang (WA)
+    <!-- ============================================== -->
+    <!-- MOBILE STICKY BOTTOM BAR                       -->
+    <!-- ============================================== -->
+    <div class="md:hidden fixed bottom-0 inset-x-0 p-3 bg-canvas/95 backdrop-blur-md border-t hairline-border z-30 flex items-center gap-2.5">
+        <button type="button" onclick="openCartModal()" class="min-h-[46px] bg-elevated border hairline-border text-espresso px-4 rounded-full font-semibold text-xs flex items-center gap-2">
+            <span>Pesanan</span>
+            <span id="mobileCartCount" class="tabular-nums bg-ocean text-espresso font-bold px-2 py-0.5 rounded-full">0</span>
+        </button>
+        <a href="#reservasi" class="flex-1 min-h-[46px] bg-espresso text-canvas rounded-full font-semibold text-xs flex items-center justify-center">
+            Reservasi & Pesan Sekarang
         </a>
     </div>
 
     <!-- ============================================== -->
-    <!-- MODAL (POPUP) DETAIL PRODUK                    -->
+    <!-- MODAL 1: PRODUCT DETAIL & CUSTOMIZATION        -->
     <!-- ============================================== -->
-    <div id="productModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
-        <!-- Background Gelap (Klik buat nutup) -->
-        <div onclick="closeModal()" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div id="productModal" class="fixed inset-0 z-50 hidden opacity-0 transition-studio" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div onclick="closeProductModal()" class="absolute inset-0 bg-espresso/60 backdrop-blur-xs"></div>
         
-        <!-- Kotak Popup -->
-        <div class="absolute bottom-0 md:bottom-auto md:top-1/2 left-0 md:left-1/2 transform md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[450px] bg-white rounded-t-3xl md:rounded-3xl shadow-2xl transition-transform duration-300 translate-y-full md:translate-y-10" id="modalContent">
+        <div id="productModalContent" class="absolute bottom-0 md:bottom-auto md:top-1/2 left-0 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[440px] bg-canvas rounded-t-3xl md:rounded-3xl border hairline-border shadow-2xl transition-studio translate-y-full md:translate-y-8 overflow-hidden">
             
-            <!-- Tombol Close -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 bg-cream text-coffee p-2 rounded-full hover:bg-coffee/10 z-10 transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button type="button" onclick="closeProductModal()" class="absolute top-4 right-4 w-10 h-10 bg-canvas/90 backdrop-blur-md text-espresso rounded-full flex items-center justify-center hover:bg-surface z-10 border hairline-border" aria-label="Tutup detail produk">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
 
-            <!-- Isi Popup -->
             <div class="p-5">
-                <img id="modalImage" src="" alt="Produk" class="w-full h-56 md:h-64 object-cover rounded-2xl mb-4 border border-coffee/10">
-                <h3 id="modalTitle" class="text-2xl font-black text-coffee leading-tight mb-1">Nama Produk</h3>
-                <p id="modalPrice" class="text-xl text-ocean font-black mb-3">Rp 0</p>
-                <p id="modalDesc" class="text-coffee/80 text-sm font-semibold leading-relaxed mb-6">Deskripsi</p>
-                <hr class="border-coffee/10 mb-5">
-                <div class="flex items-center gap-4">
-                    <div class="flex items-center bg-cream rounded-xl border border-coffee/10">
-                        <button class="px-4 py-3 text-coffee font-black hover:bg-coffee/5 rounded-l-xl">-</button>
-                        <span class="px-3 font-bold text-coffee text-lg">1</span>
-                        <button class="px-4 py-3 text-coffee font-black hover:bg-coffee/5 rounded-r-xl">+</button>
+                <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-surface mb-4 border hairline-border">
+                    <img id="modalImage" src="" alt="Produk" class="w-full h-full object-cover">
+                </div>
+                
+                <div class="flex items-center justify-between mb-1">
+                    <span id="modalCategory" class="text-xs uppercase tracking-wider text-ocean-deep font-bold">Kategori</span>
+                    <span id="modalPrice" class="tabular-nums text-lg text-espresso font-bold">Rp 0</span>
+                </div>
+
+                <h3 id="modalTitle" class="text-xl font-bold text-espresso leading-snug mb-1.5">Nama Produk</h3>
+                <p id="modalDesc" class="text-espresso-muted text-sm leading-relaxed mb-4">Deskripsi</p>
+
+                <div class="mb-3.5">
+                    <label class="block text-[11px] font-semibold uppercase tracking-wider text-espresso-subtle mb-1.5">Opsi Penyajian</label>
+                    <div id="modalVariantGroup" class="grid grid-cols-3 gap-2"></div>
+                </div>
+
+                <div class="mb-5">
+                    <input id="modalNote" type="text" placeholder="Catatan khusus (opsional)" class="w-full min-h-[42px] bg-elevated border hairline-border rounded-xl px-3.5 py-2 text-sm text-espresso placeholder:text-espresso-subtle focus:border-espresso">
+                </div>
+
+                <div class="flex items-center gap-2.5 pt-4 border-t hairline-border">
+                    <div class="flex items-center bg-surface rounded-xl border hairline-border shrink-0">
+                        <button type="button" onclick="changeModalQty(-1)" class="w-10 h-11 text-espresso font-bold text-base hover:bg-elevated rounded-l-xl" aria-label="Kurangi jumlah">-</button>
+                        <span id="modalQty" class="w-8 text-center tabular-nums font-bold text-espresso text-sm">1</span>
+                        <button type="button" onclick="changeModalQty(1)" class="w-10 h-11 text-espresso font-bold text-base hover:bg-elevated rounded-r-xl" aria-label="Tambah jumlah">+</button>
                     </div>
-                    <a href="#" class="flex-1 bg-ocean text-white font-black py-4 rounded-xl text-center hover:bg-ocean-hover transition-colors shadow-lg shadow-ocean/30">
-                        Pesan (WA)
-                    </a>
+                    
+                    <button type="button" onclick="addToCartFromModal()" class="flex-1 min-h-[44px] bg-espresso hover:bg-espresso/90 text-canvas font-semibold py-3 rounded-xl text-xs sm:text-sm transition-studio">
+                        + Tambah Pesanan
+                    </button>
+
+                    <button type="button" onclick="orderDirectWA()" class="flex-1 min-h-[44px] bg-ocean hover:bg-ocean/90 text-espresso font-bold py-3 rounded-xl text-xs sm:text-sm transition-studio">
+                        Pesan WA
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT POPUP -->
-    <script>
-        const modal = document.getElementById('productModal');
-        const modalContent = document.getElementById('modalContent');
+    <!-- ============================================== -->
+    <!-- MODAL 2: ORDER CART DRAWER                     -->
+    <!-- ============================================== -->
+    <div id="cartModal" class="fixed inset-0 z-50 hidden opacity-0 transition-studio" role="dialog" aria-modal="true" aria-labelledby="cartModalHeading">
+        <div onclick="closeCartModal()" class="absolute inset-0 bg-espresso/60 backdrop-blur-xs"></div>
         
-        function openModal(title, price, imageSrc, desc) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalPrice').innerText = price;
-            document.getElementById('modalImage').src = imageSrc;
-            document.getElementById('modalDesc').innerText = desc;
+        <div id="cartModalContent" class="absolute bottom-0 md:bottom-auto md:top-1/2 left-0 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[460px] bg-canvas rounded-t-3xl md:rounded-3xl border hairline-border shadow-2xl transition-studio translate-y-full md:translate-y-8 p-6">
+            <div class="flex justify-between items-center pb-4 mb-4 border-b hairline-border">
+                <div>
+                    <h3 id="cartModalHeading" class="text-xl font-bold text-espresso">Ringkasan Pesanan</h3>
+                    <p class="text-xs text-espresso-muted">Teruskan pesanan langsung ke WhatsApp kasir</p>
+                </div>
+                <button type="button" onclick="closeCartModal()" class="w-9 h-9 bg-surface text-espresso rounded-full flex items-center justify-center hover:bg-elevated" aria-label="Tutup keranjang">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
 
+            <div class="grid grid-cols-2 gap-1.5 p-1 bg-surface rounded-xl border hairline-border mb-4">
+                <button type="button" onclick="setOrderType('Makan di Sini (Dine-in)', this)" class="order-type-btn min-h-[38px] bg-espresso text-canvas py-1.5 rounded-lg font-semibold text-xs transition-studio">Makan di Sini (Dine-in)</button>
+                <button type="button" onclick="setOrderType('Bungkus (Takeaway)', this)" class="order-type-btn min-h-[38px] text-espresso-muted hover:text-espresso py-1.5 rounded-lg font-semibold text-xs transition-studio">Bungkus (Takeaway)</button>
+            </div>
+
+            <div id="cartItemsList" class="max-h-60 overflow-y-auto space-y-2.5 mb-4 pr-1"></div>
+
+            <div class="border-t hairline-border pt-3.5 mb-5 flex justify-between items-center">
+                <span class="text-xs font-semibold uppercase tracking-wider text-espresso-muted">Total Estimasi</span>
+                <span id="cartTotalPrice" class="tabular-nums text-xl font-bold text-espresso">Rp 0</span>
+            </div>
+
+            <div class="flex gap-2.5">
+                <button type="button" onclick="clearCart()" class="min-h-[46px] bg-surface hover:bg-elevated text-espresso-muted hover:text-espresso border hairline-border font-semibold px-4 rounded-xl text-xs transition-studio">
+                    Kosongkan
+                </button>
+                <button type="button" onclick="checkoutCartWA()" class="flex-1 min-h-[46px] bg-ocean hover:bg-ocean/90 text-espresso font-bold rounded-xl text-sm transition-studio">
+                    Kirim Pesanan via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-20 md:bottom-8 right-5 z-50 bg-espresso text-canvas px-4 py-3 rounded-xl shadow-lg font-medium text-xs sm:text-sm transform translate-y-20 opacity-0 transition-studio pointer-events-none border border-canvas/15">
+        Notifikasi
+    </div>
+
+    <!-- ============================================== -->
+    <!-- COMPLETE INTERACTIVE JAVASCRIPT                -->
+    <!-- ============================================== -->
+    <script>
+        const WA_NUMBER = "6281234567890";
+
+        const products = {
+            1: { id: 1, title: "Es Kopi Susu Mangata", price: 22000, category: "Kopi", type: "drink", image: "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=600&q=80", desc: "Racikan espresso dengan susu segar dan manis legit gula aren asli." },
+            2: { id: 2, title: "Susu Aren Bungur", price: 20000, category: "Non-Kopi", type: "drink", image: "https://images.unsplash.com/photo-1557006021-b85faa2bc5e2?auto=format&fit=crop&w=600&q=80", desc: "Susu murni dingin berpadu dengan saus gula aren racikan khas." },
+            3: { id: 3, title: "Camilan Cireng Rujak", price: 18000, category: "Camilan", type: "food", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80", desc: "Cireng renyah di luar dan kenyal di dalam dengan cocolan sambal rujak." },
+            4: { id: 4, title: "Nasi Goreng Spesial", price: 28000, category: "Makan Berat", type: "food", image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80", desc: "Nasi goreng bumbu rempah rumahan disajikan dengan telur mata sapi." },
+            5: { id: 5, title: "Iced Americano", price: 18000, category: "Kopi", type: "drink", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80", desc: "Double shot espresso segar dengan air dingin untuk fokus ekstra." },
+            6: { id: 6, title: "Caramel Macchiato", price: 25000, category: "Kopi", type: "drink", image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80", desc: "Perpaduan espresso, susu lembut, vanila, dan saus karamel." },
+            7: { id: 7, title: "Iced Matcha Latte", price: 24000, category: "Non-Kopi", type: "drink", image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80", desc: "Seduhan bubuk matcha Jepang yang pekat dan creamy dengan susu." },
+            8: { id: 8, title: "Signature Chocolate", price: 23000, category: "Non-Kopi", type: "drink", image: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=80", desc: "Cokelat pekat bertekstur lembut disajikan dingin maupun hangat." },
+            9: { id: 9, title: "Kentang Goreng Crispy", price: 18000, category: "Camilan", type: "food", image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=600&q=80", desc: "Kentang goreng renyah berbumbu gurih dengan saus sambal dan keju." },
+            10: { id: 10, title: "Rice Bowl Ayam Matah", price: 26000, category: "Makan Berat", type: "food", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80", desc: "Nasi hangat dengan ayam goreng tepung renyah dan sambal matah segar." }
+        };
+
+        const heroSpaces = [
+            {
+                url: "indoor.jpg",
+                badge: "01 / RUANG INDOOR AC",
+                title: "Area Indoor Ber-AC",
+                desc: "Tenang, sejuk, dengan stopkontak di dekat meja."
+            },
+            {
+                url: "outdoor.jpg",
+                badge: "02 / TERAS OUTDOOR",
+                title: "Area Teras Outdoor",
+                desc: "Sirkulasi udara terbuka yang asri buat ngobrol santai."
+            },
+            {
+                url: "bar espresso.jpg",
+                badge: "03 / BAR ESPRESSO",
+                title: "Meja Bar & Seduh",
+                desc: "Diseduh segar setiap hari dari biji kopi pilihan."
+            }
+        ];
+
+        let activeCategory = 'all';
+        let selectedProduct = null;
+        let selectedVariant = 'Normal';
+        let modalQty = 1;
+        let cart = [];
+        let orderType = 'Makan di Sini (Dine-in)';
+        let resPax = 2;
+        let resArea = 'Indoor AC';
+
+        function formatRupiah(num) {
+            return 'Rp ' + num.toLocaleString('id-ID');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function switchHeroPhoto(index) {
+            const img = document.getElementById('heroImage');
+            const badge = document.getElementById('heroBadge');
+            const title = document.getElementById('heroTitle');
+            const desc = document.getElementById('heroDesc');
+            const counter = document.getElementById('heroIndex');
+            const tabs = document.querySelectorAll('.hero-tab');
+
+            img.style.opacity = '0.35';
+            setTimeout(() => {
+                img.src = heroSpaces[index].url;
+                badge.innerText = heroSpaces[index].badge;
+                title.innerText = heroSpaces[index].title;
+                desc.innerText = heroSpaces[index].desc;
+                counter.innerText = `${index + 1} / 3`;
+                img.style.opacity = '1';
+            }, 140);
+
+            tabs.forEach((btn, i) => {
+                if (i === index) {
+                    btn.className = "hero-tab min-h-[38px] py-1.5 px-2 rounded-lg font-semibold text-xs bg-espresso text-canvas transition-studio whitespace-nowrap";
+                } else {
+                    btn.className = "hero-tab min-h-[38px] py-1.5 px-2 rounded-lg font-semibold text-xs text-espresso-muted hover:text-espresso transition-studio whitespace-nowrap";
+                }
+            });
+        }
+
+        function setCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = "cat-btn min-h-[40px] bg-espresso text-canvas px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap";
+                } else {
+                    btn.className = "cat-btn min-h-[40px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso px-4 py-2 rounded-full font-semibold text-xs transition-studio whitespace-nowrap";
+                }
+            });
+            applyMenuFilter();
+        }
+
+        function applyMenuFilter() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            document.getElementById('clearSearchBtn').classList.toggle('hidden', query.length === 0);
+
+            const cards = document.querySelectorAll('.menu-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cat = card.dataset.category;
+                const pop = card.dataset.popular === 'true';
+                const name = card.dataset.name;
+
+                const matchCat = (activeCategory === 'all') ||
+                                 (activeCategory === 'Andalan' && pop) ||
+                                 (cat === activeCategory);
+                const matchSearch = name.includes(query);
+
+                if (matchCat && matchSearch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('visibleCountLabel').innerText = visibleCount;
+            document.getElementById('emptyMenuState').classList.toggle('hidden', visibleCount > 0);
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            applyMenuFilter();
+        }
+
+        function resetFilter() {
+            document.getElementById('searchInput').value = '';
+            setCategory('all');
+        }
+
+        function quickAdd(event, id) {
+            event.stopPropagation();
+            const item = products[id];
+            if (!item) return;
+
+            const defaultVar = item.type === 'drink' ? 'Normal Sugar' : 'Standar';
+            addItemToCart(item, 1, defaultVar, '');
+            showToast(`+1 ${item.title} masuk pesanan`);
+        }
+
+        function openProductModal(id) {
+            selectedProduct = products[id];
+            if (!selectedProduct) return;
+
+            modalQty = 1;
+            document.getElementById('modalImage').src = selectedProduct.image;
+            document.getElementById('modalCategory').innerText = selectedProduct.category;
+            document.getElementById('modalTitle').innerText = selectedProduct.title;
+            document.getElementById('modalDesc').innerText = selectedProduct.desc;
+            document.getElementById('modalNote').value = '';
+
+            const varGroup = document.getElementById('modalVariantGroup');
+            const options = selectedProduct.type === 'drink'
+                ? ['Normal Sugar', 'Less Sugar', 'Less Ice']
+                : ['Standar', 'Pedas Sedang', 'Ekstra Pedas'];
+
+            selectedVariant = options[0];
+            varGroup.innerHTML = options.map((opt, idx) => `
+                <button type="button" onclick="selectModalVariant('${opt}', this)" class="modal-var-btn min-h-[38px] py-2 px-2 rounded-xl font-semibold text-xs border transition-studio ${idx === 0 ? 'bg-espresso text-canvas border-espresso' : 'bg-elevated text-espresso-muted hairline-border'}">
+                    ${opt}
+                </button>
+            `).join('');
+
+            updateModalPrice();
+
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('productModalContent');
             modal.classList.remove('hidden');
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
-                modalContent.classList.remove('translate-y-full', 'md:translate-y-10');
+                content.classList.remove('translate-y-full', 'md:translate-y-8');
             }, 10);
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
+        function selectModalVariant(variant, btnEl) {
+            selectedVariant = variant;
+            document.querySelectorAll('.modal-var-btn').forEach(btn => {
+                btn.className = "modal-var-btn min-h-[38px] py-2 px-2 rounded-xl font-semibold text-xs border transition-studio bg-elevated text-espresso-muted hairline-border";
+            });
+            btnEl.className = "modal-var-btn min-h-[38px] py-2 px-2 rounded-xl font-semibold text-xs border transition-studio bg-espresso text-canvas border-espresso";
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('productModalContent');
             modal.classList.add('opacity-0');
-            modalContent.classList.add('translate-y-full', 'md:translate-y-10');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            content.classList.add('translate-y-full', 'md:translate-y-8');
+            setTimeout(() => modal.classList.add('hidden'), 280);
             document.body.style.overflow = '';
+        }
+
+        function changeModalQty(delta) {
+            modalQty = Math.max(1, modalQty + delta);
+            updateModalPrice();
+        }
+
+        function updateModalPrice() {
+            document.getElementById('modalQty').innerText = modalQty;
+            document.getElementById('modalPrice').innerText = formatRupiah(selectedProduct.price * modalQty);
+        }
+
+        function addToCartFromModal() {
+            if (!selectedProduct) return;
+            const note = document.getElementById('modalNote').value.trim();
+            addItemToCart(selectedProduct, modalQty, selectedVariant, note);
+            closeProductModal();
+            showToast(`${modalQty}x ${selectedProduct.title} ditambahkan`);
+        }
+
+        function orderDirectWA() {
+            if (!selectedProduct) return;
+            const note = document.getElementById('modalNote').value.trim();
+            const total = formatRupiah(selectedProduct.price * modalQty);
+            let msg = `Halo Mangata Coffee, saya ingin memesan:\n- ${modalQty}x ${selectedProduct.title} (${selectedVariant}) = ${total}`;
+            if (note) msg += `\n  Catatan: ${note}`;
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function addItemToCart(product, qty, variant, note) {
+            const existing = cart.find(c => c.id === product.id && c.variant === variant && c.note === note);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    qty: qty,
+                    variant: variant,
+                    note: note
+                });
+            }
+            updateCartCounters();
+        }
+
+        function updateCartCounters() {
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartBadge').innerText = totalCount;
+            document.getElementById('mobileCartCount').innerText = totalCount;
+        }
+
+        function setOrderType(type, btnEl) {
+            orderType = type;
+            document.querySelectorAll('.order-type-btn').forEach(btn => {
+                btn.className = "order-type-btn min-h-[38px] text-espresso-muted hover:text-espresso py-1.5 rounded-lg font-semibold text-xs transition-studio";
+            });
+            btnEl.className = "order-type-btn min-h-[38px] bg-espresso text-canvas py-1.5 rounded-lg font-semibold text-xs transition-studio";
+        }
+
+        function openCartModal() {
+            renderCartList();
+            const modal = document.getElementById('cartModal');
+            const content = document.getElementById('cartModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('translate-y-full', 'md:translate-y-8');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCartModal() {
+            const modal = document.getElementById('cartModal');
+            const content = document.getElementById('cartModalContent');
+            modal.classList.add('opacity-0');
+            content.classList.add('translate-y-full', 'md:translate-y-8');
+            setTimeout(() => modal.classList.add('hidden'), 280);
+            document.body.style.overflow = '';
+        }
+
+        function renderCartList() {
+            const listEl = document.getElementById('cartItemsList');
+            const totalEl = document.getElementById('cartTotalPrice');
+
+            if (cart.length === 0) {
+                listEl.innerHTML = `<div class="text-center py-8 text-espresso-subtle text-sm">Belum ada item di daftar pesanan.</div>`;
+                totalEl.innerText = 'Rp 0';
+                return;
+            }
+
+            let total = 0;
+            listEl.innerHTML = cart.map((item, idx) => {
+                const sub = item.price * item.qty;
+                total += sub;
+                return `
+                    <div class="flex items-center justify-between bg-elevated p-3.5 rounded-xl border hairline-border">
+                        <div class="pr-2">
+                            <h4 class="font-bold text-espresso text-sm">${item.title}</h4>
+                            <p class="text-xs text-espresso-muted">${item.variant}${item.note ? ` • ${item.note}` : ''}</p>
+                            <p class="tabular-nums text-xs font-bold text-ocean-deep mt-1">${formatRupiah(sub)}</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-surface rounded-lg border hairline-border px-2 py-1 shrink-0">
+                            <button type="button" onclick="changeCartQty(${idx}, -1)" class="w-6 h-6 font-bold text-espresso">-</button>
+                            <span class="tabular-nums font-bold text-xs text-espresso">${item.qty}</span>
+                            <button type="button" onclick="changeCartQty(${idx}, 1)" class="w-6 h-6 font-bold text-espresso">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            totalEl.innerText = formatRupiah(total);
+        }
+
+        function changeCartQty(idx, delta) {
+            cart[idx].qty += delta;
+            if (cart[idx].qty <= 0) cart.splice(idx, 1);
+            updateCartCounters();
+            renderCartList();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartCounters();
+            renderCartList();
+            showToast("Daftar pesanan dikosongkan");
+        }
+
+        function checkoutCartWA() {
+            if (cart.length === 0) {
+                showToast("Tambahkan menu terlebih dahulu");
+                return;
+            }
+            let total = 0;
+            const lines = cart.map(item => {
+                const sub = item.price * item.qty;
+                total += sub;
+                return `- ${item.qty}x ${item.title} (${item.variant})${item.note ? ` [${item.note}]` : ''} = ${formatRupiah(sub)}`;
+            });
+
+            const msg = `Halo Mangata Coffee, saya ingin memesan (${orderType}):\n\n${lines.join('\n')}\n\n*Total Estimasi: ${formatRupiah(total)}*`;
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function setQuickTime(timeText) {
+            document.getElementById('resTime').value = timeText;
+        }
+
+        function setQuickResNote(noteText) {
+            document.getElementById('resNote').value = noteText;
+        }
+
+        function changeResPax(delta) {
+            resPax = Math.max(1, resPax + delta);
+            document.getElementById('resPaxDisplay').innerText = `${resPax} Orang`;
+        }
+
+        function selectResArea(area, btnEl) {
+            resArea = area;
+            document.querySelectorAll('.res-area-btn').forEach(btn => {
+                btn.className = "res-area-btn min-h-[42px] bg-elevated border hairline-border text-espresso-muted hover:text-espresso py-2 px-2 rounded-xl font-semibold text-xs transition-studio";
+            });
+            btnEl.className = "res-area-btn min-h-[42px] bg-espresso text-canvas py-2 px-2 rounded-xl font-semibold text-xs transition-studio";
+        }
+
+        function submitReservationWA() {
+            const name = document.getElementById('resName').value.trim() || 'Pelanggan';
+            const time = document.getElementById('resTime').value.trim() || 'Hari ini';
+            const note = document.getElementById('resNote').value.trim();
+
+            let msg = `Halo Mangata Coffee, saya ingin Reservasi Meja:\n\n- Nama: ${name}\n- Waktu: ${time}\n- Jumlah Tamu: ${resPax} Orang\n- Area Duduk: ${resArea}`;
+            if (note) msg += `\n- Catatan: ${note}`;
+
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function copyAddress() {
+            const addr = document.getElementById('cafeAddress').innerText;
+            navigator.clipboard.writeText(addr);
+            showToast("Alamat kedai berhasil disalin");
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2400);
         }
     </script>
 </body>
